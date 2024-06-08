@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Рецепты</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__logo">
+        <a href="/" class="header__logo-link">Tastebite</a>
+      </div>
+      <nav class="header__nav">
+        <ul class="header__nav-list">
+          <li class="header__nav-item">
+            <a href="/" class="header__nav-link">Homepage</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="/recipes" class="header__nav-link">Recipe Page</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="/pages" class="header__nav-link">Pages</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="/buy" class="header__nav-link">Buy</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="header__search">
+        <input
+          type="text"
+          class="header__search-input"
+          placeholder="Search..."
+        />
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="main-content__highlighted">
+        <img
+          src="src/images/banner.png"
+          alt="Mighty Super Cheesecake"
+          class="main-content__highlighted-image"
+        />
+      </section>
+
+      <section class="main-content__super-delicious">
+        <h2 class="main-content__super-delicious-title">Super Delicious</h2>
+        <ul
+          id="recipes-container"
+          class="main-content__super-delicious-items"
+        ></ul>
+      </section>
+    </main>
+    <script src="src/script.js"></script>
+  </body>
+</html>
