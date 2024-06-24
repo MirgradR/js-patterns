@@ -31,14 +31,20 @@ function displayRecipes(recipes) {
   });
 }
 
+const sortByID = (recipes) => {
+  return recipes.toSorted((a, b) => a.id - b.id);
+};
+
 export const sortRecipesFeature = () => {
   const sortButton = document.getElementById("sort");
 
   sortButton.addEventListener("click", () => {
-    const sortRecipesByid = sortRecipes((recipes) => {
-      return recipes.toSorted((a, b) => a.id - b.id);
-    });
-    const sortedRecipes = sortRecipesByid(recipesState);
+    // const sortRecipesByid = sortRecipes((recipes) => {
+    //   return recipes.toSorted((a, b) => a.name - b.name);
+    // });
+
+    const sortedRecipes = sortRecipesByDifficulty(recipesState);
+
     displayRecipes(sortedRecipes);
   });
 };
