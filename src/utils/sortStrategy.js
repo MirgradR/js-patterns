@@ -11,7 +11,7 @@ const sortByDifficulty = (recipes) => {
   return recipes.toSorted((a, b) => a.difficulty - b.difficulty);
 };
 
-const sortRecipes = (strategy) => {
+export const sortRecipes = (strategy) => {
   return function (recipes) {
     const isValid = recipes.every(
       (recipe) =>
@@ -30,6 +30,3 @@ const sortRecipes = (strategy) => {
 export const sortRecipesByDifficulty = sortRecipes(sortByDifficulty);
 export const sortRecipesByTime = sortRecipes(sortByTime);
 export const sortRecipesByName = sortRecipes(sortByName);
-export const sortRecipesById = sortRecipes((recipes) => {
-  return recipes.toSorted((a, b) => a.id - b.id);
-});

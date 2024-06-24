@@ -2,6 +2,7 @@ import { fetchRecipes } from "./api/recipeApi";
 import { cardFactory } from "./components/RecipeCard/RecipeCard";
 import { modalWindowFeature } from "./utils/modalWindowFeature";
 import {
+  sortRecipes,
   sortRecipesByDifficulty,
   sortRecipesByTime,
 } from "./utils/sortStrategy";
@@ -34,7 +35,10 @@ export const sortRecipesFeature = () => {
   const sortButton = document.getElementById("sort");
 
   sortButton.addEventListener("click", () => {
-    const sortedRecipes = sortRecipesByTime(recipesState);
+    const sortRecipesByid = sortRecipes((recipes) => {
+      return recipes.toSorted((a, b) => a.id - b.id);
+    });
+    const sortedRecipes = sortRecipesByid(recipesState);
     displayRecipes(sortedRecipes);
   });
 };
