@@ -1,3 +1,5 @@
+import { transformRecipes } from "../utils/recipiesDTO";
+
 const apiKey = "29ccc96cf81445b891e3d812b9865159";
 const baseUrl = "https://api.spoonacular.com/recipes";
 
@@ -6,7 +8,7 @@ async function fetchRecipes(query) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    return data.results;
+    return transformRecipes(data.results);
   } catch (error) {
     console.error("Ошибка:", error);
   }
