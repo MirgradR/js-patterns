@@ -118,6 +118,20 @@
   flex-direction: column;
 }
 
+.main-content__super-delicious-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-content__super-delicious-button {
+  padding: 5px 10px;
+  background-color: #fefefe;
+  border-radius: 10px;
+  border: 1px solid rgb(217, 210, 210);
+  cursor: pointer;
+}
+
 .main-content__super-delicious-item.basic-card {
   width: 200px;
   flex-direction: column;
