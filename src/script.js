@@ -1,25 +1,12 @@
 import { fetchRecipes } from "./api/recipeApi";
 import { cardFactory } from "./components/RecipeCard/RecipeCard";
 import { modalWindowFeature } from "./utils/modalWindowFeature";
-import {
-  sortRecipes,
-  sortRecipesByDifficulty,
-  sortRecipesByTime,
-} from "./utils/sortStrategy";
+import { sortRecipesByDifficulty } from "./utils/sortStrategy";
 import "./styles.css";
+import { createObservable } from "./utils/createObservable";
 
-let recipesState = [];
-
-async function fetchAndDisplayRecipes(query) {
-  try {
-    const recipes = await fetchRecipes(query);
-
-    displayRecipes(recipes);
-    recipesState = recipes;
-  } catch (error) {
-    console.error("Ошибка при отображении рецептов:", error);
-  }
-}
+// let recipesState = [];
+const recipesObservable = createObservable([]);
 
 function displayRecipes(recipes) {
   const recipesContainer = document.getElementById("recipes-container");
@@ -31,21 +18,30 @@ function displayRecipes(recipes) {
   });
 }
 
-const sortByID = (recipes) => {
-  return recipes.toSorted((a, b) => a.id - b.id);
-};
+recipesObservable.subscribe(displayRecipes);
+recipesObservable.subscribe((state) => console.log(state));
+// recipesObservable.subscribe(displayRecipes);
+
+async function fetchAndDisplayRecipes(query) {
+  try {
+    const recipes = await fetchRecipes(query);
+
+    recipesObservable.setState(recipes);
+    // displayRecipes(recipes);
+    // recipesState = recipes;
+  } catch (error) {
+    console.error("Ошибка при отображении рецептов:", error);
+  }
+}
 
 export const sortRecipesFeature = () => {
   const sortButton = document.getElementById("sort");
 
   sortButton.addEventListener("click", () => {
-    // const sortRecipesByid = sortRecipes((recipes) => {
-    //   return recipes.toSorted((a, b) => a.name - b.name);
-    // });
+    const sortedRecipes = sortRecipesByDifficulty(recipesObservable.getState());
 
-    const sortedRecipes = sortRecipesByDifficulty(recipesState);
-
-    displayRecipes(sortedRecipes);
+    recipesObservable.setState(sortedRecipes);
+    // displayRecipes(sortedRecipes);
   });
 };
 
