@@ -5,7 +5,6 @@ import { sortRecipesByDifficulty } from "./utils/sortStrategy";
 import "./styles.css";
 import { createObservable } from "./utils/createObservable";
 
-// let recipesState = [];
 const recipesObservable = createObservable([]);
 
 function displayRecipes(recipes) {
@@ -20,15 +19,12 @@ function displayRecipes(recipes) {
 
 recipesObservable.subscribe(displayRecipes);
 recipesObservable.subscribe((state) => console.log(state));
-// recipesObservable.subscribe(displayRecipes);
 
 async function fetchAndDisplayRecipes(query) {
   try {
     const recipes = await fetchRecipes(query);
 
     recipesObservable.setState(recipes);
-    // displayRecipes(recipes);
-    // recipesState = recipes;
   } catch (error) {
     console.error("Ошибка при отображении рецептов:", error);
   }
@@ -41,7 +37,6 @@ export const sortRecipesFeature = () => {
     const sortedRecipes = sortRecipesByDifficulty(recipesObservable.getState());
 
     recipesObservable.setState(sortedRecipes);
-    // displayRecipes(sortedRecipes);
   });
 };
 
